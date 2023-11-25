@@ -1,9 +1,9 @@
 import React from 'react'
 import Navbar from '../components/Navbar/Navbar'
-import WalletBalanceCard from '../components/HomePage/WalletBalanceCard'
-import AddBalanceCard from '../components/HomePage/AddBalanceCard'
+import WalletBalanceCard from '../components/Home/WalletBalanceCard'
+import AddBalanceCard from '../components/Home/AddBalanceCard'
 import { Grid } from '@mui/material'
-import RequestedUser from '../components/HomePage/RequestedUser'
+import RequestedUser from '../components/Home/RequestedUser'
 
 function HomePage() {
   return (

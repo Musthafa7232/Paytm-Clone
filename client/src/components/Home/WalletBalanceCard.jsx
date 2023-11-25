@@ -5,17 +5,20 @@ import PayModal from "../Modals/PayModal";
 import RequestMoneyModal from "../Modals/RequestMoneyModal";
 import { useSelector } from "react-redux";
 import axios from "../../Axios";
+import { useNavigate } from "react-router-dom";
 function WalletBalanceCard() {
     const { user } = useSelector((state) => state.user);
     const [paymodal, setPayModal] = useState(false)
     const [requestmodal, setRequestModal] = useState(false)
     const handlePayClose = () => setPayModal(false);
     const handleRequestClose = () => setRequestModal(false);
+    const Navigate=useNavigate()
 const [users,setUsers]=useState([])
     useEffect(()=>{
 axios.get('/api/getAllUsers',{ headers: {
     "auth-token": JSON.parse(localStorage.getItem("authorization.user")),
   },}).then((res)=>{
+    console.log(res.data);
 if(res.data.success){
 setUsers(res.data.users)
 }
@@ -34,8 +37,8 @@ setUsers(res.data.users)
         }}
       >
         <CardContent>
-            <PayModal  open={paymodal} close={handlePayClose}/>
-            <RequestMoneyModal  open={requestmodal} close={handleRequestClose}/>
+            <PayModal  open={paymodal} close={handlePayClose} users={users}/>
+            <RequestMoneyModal  open={requestmodal} close={handleRequestClose}  users={users}/>
           <Grid
             container
             sx={{
@@ -49,7 +52,7 @@ setUsers(res.data.users)
                 mb:2
              }}>
                <Typography variant="h5" sx={{ fontWeight: 700 }}>
-               Hi {user.email}
+               Hi {user?.email}
               </Typography> 
              </Grid>
          
@@ -104,6 +107,7 @@ setUsers(res.data.users)
                   fullWidth
                   variant="outlined"
                   startIcon={<PaymentIcon />}
+                  onClick={()=>Navigate('/accountStatement')}
                 >
                   Account Statement
                 </Button>

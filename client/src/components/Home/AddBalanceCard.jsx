@@ -9,8 +9,27 @@ import {
 } from "@mui/material";
 import React, { useState } from "react";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
+import axios from "../../Axios";
+import { useDispatch } from "react-redux";
+import { SetUserData } from "../../features/userReducer";
 function AddBalanceCard() {
-  const [amount, setAmount] = useState("1000");
+  const [amount, setAmount] = useState(1000);
+const dispatch=useDispatch()
+  const addMoneyToWallet=()=>{
+    const data={
+        amountToAdd:amount
+    }
+    axios.post('/api/payment/addBalance',data,{headers: {
+        "auth-token": JSON.parse(localStorage.getItem("authorization.user")),
+      }}).then(res=>{
+        console.log(res.data);
+        if(res.data.success){
+dispatch(SetUserData(res.data.user))
+        }
+      }).catch(err=>{
+        console.log(err);
+      })
+  }
   return (
     <Grid item xs={12} lg={4} container sx={{ mt: 4 }}>
       <Card
@@ -57,11 +76,11 @@ function AddBalanceCard() {
                 type="number"
                 value={amount}
                 variant="outlined"
-                onChange={(e)=>setAmount(e.target.value)}
+                onChange={(e)=>setAmount(parseInt(e.target.value, 10))}
               />
             </Grid>
             <Grid item sx={{ my: 2, mx: 12 }}>
-              <Button variant="outlined">Add</Button>
+              <Button variant="outlined" onClick={addMoneyToWallet}>Add</Button>
             </Grid>
           </Grid>
         </CardContent>

@@ -1,22 +1,23 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import Modal from '@mui/material/Modal';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
 import CloseIcon from "@mui/icons-material/Close";
+import { Card, CardContent, Grid, TextField } from "@mui/material";
+import NestedRequestModal from "./NestedRequestModal";
 
 
-export default function RequestMoneyModal({open,close}) {
+export default function RequestMoneyModal({open,close,users}) {
     const onDecline = () => {
         close();
       };
-      React.useEffect(()=>{
-console.log(open);
-      },[open])
+      const [modalOpen,setModalOpen]=React.useState(false)
+      const handleClose=()=>setModalOpen(false)
+  
   return (
       <Modal
         open={open}
-        onClose={()=>handleClose()}
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
@@ -33,17 +34,44 @@ console.log(open);
           textAlign: "center",
         }}
       >
+       
          <Button
           sx={{ position: "absolute", top: 8, right: 8 }}
           color="inherit"
           onClick={onDecline}
         > <CloseIcon fontSize="large" /></Button>
-          <Typography id="modal-modal-title" variant="h6" component="h2">
-            Text in a Req modal
-          </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-            Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
-          </Typography>
+          <Grid container>
+          <Grid item>
+            {users.map((user) => {
+              return (
+                <Card sx={{
+                    m:1
+                }}>
+                  <CardContent sx={{display:'flex',alignItems:'center'}}>
+                    <Typography>{user.email}</Typography>
+                    <Button
+                      sx={{ m: 2 }}
+                      variant="outlined"
+                      onClick={() => {
+                        setModalOpen(true);
+                      }}
+                    >
+                      Request
+                    </Button>
+                    {modalOpen && (
+                      <NestedRequestModal
+                        open={modalOpen}
+                        close={handleClose}
+                        user={user}
+                        outerClose={close}
+                      />
+                    )}
+                  </CardContent>
+                </Card>
+              );
+            })}
+          </Grid>
+        </Grid>
         </Box>
       </Modal>
   );

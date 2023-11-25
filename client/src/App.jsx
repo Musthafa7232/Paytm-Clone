@@ -1,9 +1,11 @@
 import LoginPage from "./pages/LoginPage"
 import RegisterPage from "./pages/RegisterPage"
 import HomePage from './pages/HomePage'
+import AccountStatementPage from "./pages/AccountStatementPage"
 import { Routes,Route } from "react-router-dom"
 import UserPublicRoute from "./routes/UserPublicRoute"
 import UserPrivateRoute from "./routes/UserPrivateRoute"
+
 function App() {
 
   return (
@@ -15,6 +17,7 @@ function App() {
      </Route>
      <Route element={<UserPrivateRoute />}>
      <Route path="/"  element={<HomePage/>} />
+     <Route path="/accountStatement"  element={<AccountStatementPage/>} />
      </Route>
      </Routes>
     </>

@@ -29,16 +29,6 @@ const userSchema = new mongoose.Schema({
   },
 });
 
-userSchema.pre("save", async function (next) {
-  try {
-    const hashedPassword = await bcrypt.hash(this.password, 10);
-    this.password = hashedPassword;
-    next();
-  } catch (error) {
-    console.error(error);
-    next(error); // Pass the error to the next middleware
-  }
-});
 
 const Users = mongoose.model("User", userSchema);
 
