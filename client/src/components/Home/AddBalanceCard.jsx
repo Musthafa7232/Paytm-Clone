@@ -7,14 +7,29 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import CurrencyRupeeIcon from "@mui/icons-material/CurrencyRupee";
 import axios from "../../Axios";
 import { useDispatch } from "react-redux";
 import { SetUserData } from "../../features/userReducer";
+import BoilerPlateCode from "../Tostify/BoilerPlateCode";
 function AddBalanceCard() {
   const [amount, setAmount] = useState(1000);
 const dispatch=useDispatch()
+
+const [tost, settost] = useState({});
+const initial={
+  open:false,
+  success:false,
+  data:''
+}
+useEffect(()=>{
+settost(initial)
+},[])
+
+const setToastClosed=()=>{
+  settost(initial)
+}
   const addMoneyToWallet=()=>{
     const data={
         amountToAdd:amount
@@ -24,6 +39,11 @@ const dispatch=useDispatch()
       }}).then(res=>{
         console.log(res.data);
         if(res.data.success){
+          settost({
+            data:'Money Added to Wallet Successfully ',
+            success:true,
+            open:true
+           })
 dispatch(SetUserData(res.data.user))
         }
       }).catch(err=>{
@@ -32,6 +52,7 @@ dispatch(SetUserData(res.data.user))
   }
   return (
     <Grid item xs={12} lg={4} container sx={{ mt: 4 }}>
+      <BoilerPlateCode success={tost.success} open={tost.open} data={tost.data} setToastClosed={setToastClosed} />
       <Card
         className="CardItems"
         variant="outlined"

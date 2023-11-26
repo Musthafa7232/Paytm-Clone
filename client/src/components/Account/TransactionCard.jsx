@@ -90,12 +90,12 @@ function TransactionCard() {
                             {details.from._id === details.to._id
                               ? "Self Credited"
                               : details.from._id === user._id
-                              ? `Payed to ${details.to.email}`
-                              : `Payed by ${details.to.email}`}
+                              ? `Paid to ${details.to.email}`
+                              : `Paid by ${details.from.email}`}
                           </Typography>
                           
                           <Typography textAlign={"end"}>
-                            {details.amount}
+                          ₹ {details.amount}
                           </Typography>
                         </Grid><Typography variant="caption">
                           {formatCreatedAt(details.createdAt)}

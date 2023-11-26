@@ -1,15 +1,36 @@
 import { Box, Button, Grid, Modal, TextField, Typography } from "@mui/material";
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 
 import CloseIcon from "@mui/icons-material/Close";
 import axios from "../../Axios";
+import BoilerPlateCode from "../Tostify/BoilerPlateCode";
 function NestedRequestModal({ open, close, user, outerClose }) {
   const [amount, setAmount] = useState(0);
   const onDecline = () => {
     close();
   };
 
+  const [tost, settost] = useState({});
+  const initial={
+    open:false,
+    success:false,
+    data:''
+  }
+  useEffect(()=>{
+settost(initial)
+  },[])
+
+  const setToastClosed=()=>{
+    settost(initial)
+  }
   const handleRequestMoney = () => {
+    if (amount < 1) {
+      settost({
+        data: "Amount Should be greter than 0 ",
+        success: false,
+        open: true,
+      });
+    } else {
     const data = {
       amount: amount,
       toUserId: user._id,
@@ -22,14 +43,29 @@ function NestedRequestModal({ open, close, user, outerClose }) {
       })
       .then((res) => {
         if (res.data.success) {
+          settost({
+            data:'Requested User Successfully',
+            success:true,
+            open:true
+           })
           outerClose();
           close();
         }
+      }).catch(err=>{
+        settost({
+          data:'Falied to Request user,Please try again later ',
+          success:false,
+          open:true
+         })
+         outerClose();
+         close();
       });
+    }
   };
 
   return (
     <div>
+       <BoilerPlateCode success={tost.success} open={tost.open} data={tost.data} setToastClosed={setToastClosed} />
       <Modal
         open={open}
         onClose={() => handleClose()}

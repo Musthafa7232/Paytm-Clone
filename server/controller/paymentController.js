@@ -56,23 +56,21 @@ export const sendMoney = async (req, res) => {
         throw new Error("Insufficient balance");
       }
 
-      // Deduct amount from sender's wallet
+    
       senderUser.walletBalance -= amount;
       await senderUser.save();
 
-      // Add amount to receiver's wallet
       receiverUser.walletBalance += amount;
       await receiverUser.save();
 
-      // Create payment record
+   
       const payment = new paymentModel({
         from: req.user.id,
         to: receiverUserId,
         amount,
-        paymentFulfilled: true, // You can adjust this based on your logic
+        paymentFulfilled: true, 
       });
 
-      // Update payment history in sender and receiver users
       senderUser.paymentHistory.push(payment._id);
       await senderUser.save();
 

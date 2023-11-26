@@ -22,8 +22,12 @@ axios.get('/api/getAllUsers',{ headers: {
 if(res.data.success){
 setUsers(res.data.users)
 }
+  }).catch(err=>{
+    console.log(err);
   })
     },[])
+
+ 
   return (
     <Grid item xs={12} lg={12} container sx={{ mt: 4 }}>
       <Card

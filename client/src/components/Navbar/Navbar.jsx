@@ -7,7 +7,7 @@ import { Grid, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { ClearUserData, SetUserData } from "../../features/userReducer";
 import { Clear_user } from "../../features/AuthReducer";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import axios from "../../Axios";
 
 function Navbar() {
@@ -15,21 +15,26 @@ function Navbar() {
   const dispatch = useDispatch();
   const { user } = useSelector((state) => state.user);
   const { auth } = useSelector((state) => state.auth);
-  React.useEffect(()=>{
-axios.get('/api/userData', {headers: {
-    "auth-token": JSON.parse(localStorage.getItem("authorization.user")),
-  }}).then((res)=>{
-    console.log(res.data);
-    if(res.data){
-        dispatch(SetUserData(res.data))
-    }else{
-        dispatch(ClearUserData());
-        dispatch(Clear_user());
-    }
-  }) .catch((err) => {
-    console.log(err);
-  });
-  },[auth])
+  React.useEffect(() => {
+    axios
+      .get("/api/userData", {
+        headers: {
+          "auth-token": JSON.parse(localStorage.getItem("authorization.user")),
+        },
+      })
+      .then((res) => {
+        console.log(res.data);
+        if (res.data) {
+          dispatch(SetUserData(res.data));
+        } else {
+          dispatch(ClearUserData());
+          dispatch(Clear_user());
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [auth]);
   const logoutHandler = () => {
     localStorage.removeItem("authorization.user");
     dispatch(ClearUserData());
@@ -56,19 +61,21 @@ axios.get('/api/userData', {headers: {
                 src="https://pwebassets.paytm.com/commonwebassets/paytmweb/header/images/logo.svg"
               ></img>
             </Grid>
-            <Grid
-            item
-            xs={7}
-              sx={{
-                display: "flex",
-                justifyContent: "end",
-                alignItems: "center",
-              }}
-              onClick={logoutHandler}
-            >
-              <LogoutIcon sx={{ marginRight: "0.75rem" }} />
-              Logout
-            </Grid>
+            {user && (
+              <Grid
+                item
+                xs={7}
+                sx={{
+                  display: "flex",
+                  justifyContent: "end",
+                  alignItems: "center",
+                }}
+                onClick={logoutHandler}
+              >
+                <LogoutIcon sx={{ marginRight: "0.75rem" }} />
+                Logout
+              </Grid>
+            )}
           </Grid>
         </Toolbar>
       </Container>
