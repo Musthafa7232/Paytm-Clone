@@ -33,7 +33,7 @@ EMAIL_PASS="PASSWORD_FOR_NODEMAILER"
 BASE_URL="http://localhost:5173"  // Vite localhost
 Make sure to replace the placeholder values with your specific configuration details.
 ```
-##Features
+## Features
 -**User Authentication:**
 
 Secure registration and login with email and password.
