@@ -32,7 +32,7 @@ USER_EMAIL="EMAIL_FOR_NODEMAILER"
 EMAIL_PASS="PASSWORD_FOR_NODEMAILER"
 BASE_URL="http://localhost:5173"  // Vite localhost
 Make sure to replace the placeholder values with your specific configuration details.
-
+```
 Features
 User Authentication:
 
@@ -57,22 +57,19 @@ Set up a MongoDB database and obtain the connection string.
 Installation
 Clone the repository:
 
-bash
-Copy code
+
 git clone https://github.com/your-username/paytm-wallet-clone.git
 cd paytm-wallet-clone
 Install dependencies:
 
 For frontend (inside the client directory):
 
-bash
-Copy code
+
 cd client
 npm install
 For backend:
 
-bash
-Copy code
+
 cd ..
 npm install
 Configure environment variables:
@@ -83,13 +80,11 @@ Start the application:
 
 For frontend (inside the client directory):
 
-bash
-Copy code
+
 npm run dev
 For backend:
 
-bash
-Copy code
+
 npm run start
 Access the application at http://localhost:Your_PORT_NUMBER.
 
@@ -99,7 +94,6 @@ If you would like to contribute to this project, feel free to open an issue or c
 License
 This project is licensed under the MIT License.
 
-csharp
-Copy code
+
 
 Make sure to replace the placeholder values with your actual configuration details, and this README file should guide users on setting up the necessary environmental variables for your Paytm Wallet Clone project.
