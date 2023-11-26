@@ -33,28 +33,30 @@ EMAIL_PASS="PASSWORD_FOR_NODEMAILER"
 BASE_URL="http://localhost:5173"  // Vite localhost
 Make sure to replace the placeholder values with your specific configuration details.
 ```
-Features
-User Authentication:
+##Features
+-**User Authentication:**
 
 Secure registration and login with email and password.
 Two-Factor Authentication (2FA) for additional account security.
-Wallet Operations:
+-**Wallet Operations:**
 
 Add funds to the wallet for seamless transactions.
-Peer-to-Peer Transactions:
+-**Peer-to-Peer Transactions:**
 
 Transfer funds easily between users.
-Payment Requests:
+-**Payment Requests:**
 
 Send and receive payment requests, simplifying fund collection.
-Account Statements:
+-**Account Statements:**
 
 View detailed transaction history with incoming and outgoing transactions.
-Getting Started
-Prerequisites
-Ensure you have Node.js installed.
-Set up a MongoDB database and obtain the connection string.
-Installation
+
+##Getting Started
+**Prerequisites**
+-Ensure you have Node.js installed.
+-Set up a MongoDB database and obtain the connection string.
+
+**Installation**
 Clone the repository:
 
 
