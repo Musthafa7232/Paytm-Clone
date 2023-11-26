@@ -76,7 +76,7 @@ function TransactionCard() {
               </Grid>
 
               <Grid item xs={12} sx={{ mt: 3 }}>
-                {payments.map((details) => {
+                {payments&&payments.lemgth>0?(payments.map((details) => {
                   return (
                     <Card sx={{ my: 7, height: "4rem" }}>
                       <CardContent>
@@ -103,7 +103,12 @@ function TransactionCard() {
                       </CardContent>
                     </Card>
                   );
-                })}
+                })):(
+                  <Typography textAlign='center'>
+                    No Transaction History
+                  </Typography>
+                )}
+                {}
               </Grid>
             </Grid>
           </CardContent>

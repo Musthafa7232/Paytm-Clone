@@ -51,7 +51,8 @@ import {
                 </Typography>
               </Grid>
               <Grid item xs={12}>
-              {requests.map((details) => {
+                {requests&&requests.length>0?(
+                  requests.map((details) => {
                   return (
                     <Card sx={{ my: 4, height: "4rem" }}>
                       <CardContent >
@@ -72,7 +73,13 @@ import {
                       </CardContent>
                     </Card>
                   );
-                })}
+                })
+                ):(
+<Typography textAlign='center' variant="subtitle1">
+  No Requests Yet
+</Typography>
+                )}
+              
               </Grid>
             </Grid>
           </CardContent>

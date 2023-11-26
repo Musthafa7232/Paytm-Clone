@@ -43,34 +43,38 @@ export default function PayModal({ open, close, users }) {
         </Button>
         <Grid container>
           <Grid item>
-            {users.map((user) => {
-              return (
-                <Card sx={{
-                    m:1
-                }}>
-                  <CardContent sx={{display:'flex',alignItems:'center'}}>
-                    <Typography>{user.email}</Typography>
-                    <Button
-                      sx={{ m: 2 }}
-                      variant="outlined"
-                      onClick={() => {
-                        setModalOpen(true);
-                      }}
-                    >
-                      Pay
-                    </Button>
-                    {modalOpen && (
-                      <NestedPayModal
-                        open={modalOpen}
-                        close={handleClose}
-                        user={user}
-                        outerClose={close}
-                      />
-                    )}
-                  </CardContent>
-                </Card>
-              );
-            })}
+          {users && users.length > 0 ? (
+  users.map((user) => (
+    <Card key={user.id} sx={{ m: 1 }}>
+      <CardContent sx={{ display: 'flex', alignItems: 'center' }}>
+        <Typography>{user.email}</Typography>
+        <Button
+          sx={{ m: 2 }}
+          variant="outlined"
+          onClick={() => {
+            setModalOpen(true);
+          }}
+        >
+          Pay
+        </Button>
+        {modalOpen && (
+          <NestedPayModal
+            open={modalOpen}
+            close={handleClose}
+            user={user}
+            outerClose={close}
+          />
+        )}
+      </CardContent>
+    </Card>
+  ))
+) : (
+  <div>
+   <Typography>
+    No Users Found
+   </Typography>
+  </div>
+)}
           </Grid>
         </Grid>
       </Box>
